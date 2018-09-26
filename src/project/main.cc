@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <sys/stat.h>
+#include "message.cc"
 #include "vector.cc"
 
 void vector_sample();
@@ -15,6 +16,8 @@ int main()
 
     std::cout << "[1] Run vector sample..." << std::endl;
     vector_sample();
+    std::cout << "[1] Run message sample..." << std::endl;
+    message(std::cout, "% % % %", 1, 2, 3, 4);
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;

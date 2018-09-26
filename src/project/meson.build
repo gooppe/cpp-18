@@ -1,6 +1,7 @@
 project_src = files([
     'main.cc',
-    'vector.cc'
+    'vector.cc',
+    'message.cc'
 ])
 
 executable(
