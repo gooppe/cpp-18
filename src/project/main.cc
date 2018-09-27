@@ -16,8 +16,8 @@ int main()
 
     std::cout << "[1] Run vector sample..." << std::endl;
     vector_sample();
-    std::cout << "[1] Run message sample..." << std::endl;
-    message(std::cout, "% % % %", 1, 2, 3, 4);
+    std::cout << "[2] Run message sample..." << std::endl;
+    message(std::cout, "This is formatting %. pi=%; year=%; Use '%%' character to encode pattern.\n", "example", 3.14, 2018);
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;

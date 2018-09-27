@@ -1,13 +1,20 @@
 #include <ostream>
 #include <stdexcept>
 
-void message(std::ostream &stream, const char *str)
+inline void message(std::ostream &stream, const char *str)
 {
     while (*str)
     {
         if (*str == '%')
         {
-            throw std::invalid_argument("not enought values for pattern");
+            if (*(str + 1) == '%')
+            {
+                str++;
+            }
+            else
+            {
+                throw std::invalid_argument("not enought values for pattern");
+            }
         }
         stream << *str++;
     }
@@ -20,9 +27,17 @@ void message(std::ostream &stream, const char *str, T &&arg, Args &&... args)
     {
         if (*str == '%')
         {
-            stream << arg;
-            str++;
-            message(stream, str, args...);
+            if (*(str + 1) == '%')
+            {
+                str++;
+            }
+            else
+            {
+                stream << arg;
+                str++;
+                message(stream, str, args...);
+                return;
+            }
         }
         stream << *str++;
     }
