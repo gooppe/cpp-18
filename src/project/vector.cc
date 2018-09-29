@@ -46,9 +46,10 @@ class Vector
         x._first = nullptr;
     }
 
-    Vector(const Vector<T> &x) : _size(x.size())
+    Vector(const Vector<T> &x)
     {
-        this->allocate_memory(this->_size);
+        this->allocate_memory(x.size());
+        this->_size = x.size();
         for (uint i = 0; i < x.size(); i++)
         {
             this->_first[i] = x[i];
@@ -78,10 +79,11 @@ class Vector
 
     Vector &operator=(Vector &&x)
     {
-        this->_first = x.begin();
-        this->_size = x.size();
-        this->_capacity = x.capacity();
-        x._first = nullptr;
+        delete[] this->_first;
+        this->_first = nullptr;
+
+        this->swap(x);
+
         return *this;
     }
 
@@ -89,9 +91,10 @@ class Vector
     {
         if (this != &x)
         {
-            delete this->_first;
+            this->_size = 0;
             this->allocate_memory(x.size());
-            for (uint i = 0; i < x.size(); i++)
+            this->_size = x.size();
+            for (uint i = 0; i < this->_size; i++)
             {
                 this->_first[i] = x[i];
             }

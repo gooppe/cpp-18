@@ -75,3 +75,53 @@ TEST(VectorTest, ShuffleTest)
         EXPECT_EQ(trusted_vector[i], test_vector[i]);
     }
 }
+
+TEST(VectorTest, CopyTest)
+{
+    auto test_vector = Vector<int>({1, 2, 3, 4, 5});
+    auto test_vector_copy = Vector<int>(test_vector);
+
+    EXPECT_EQ(test_vector.size(), test_vector_copy.size());
+
+    test_vector.pop_back();
+    test_vector[1] = 42;
+
+    EXPECT_EQ(4, test_vector.size());
+    EXPECT_EQ(5, test_vector_copy.size());
+    EXPECT_NE(test_vector.at(1), test_vector_copy.at(1));
+}
+
+TEST(VectorTest, MoveTest)
+{
+    auto test_vector = Vector<int>({1, 2, 3, 4, 5});
+    auto test_vector_move = Vector<int>(std::move(test_vector));
+
+    EXPECT_EQ(5, test_vector_move.size());
+}
+
+TEST(VectorTest, EquateCopyTest)
+{
+    auto test_vector_1 = Vector<int>({1, 2, 3, 4, 5});
+    auto test_vector_2 = Vector<int>({1, 2, 3});
+
+    test_vector_1 = test_vector_2;
+
+    EXPECT_EQ(test_vector_1.size(), test_vector_2.size());
+
+    test_vector_1.pop_back();
+    test_vector_1[1] = 42;
+
+    EXPECT_EQ(2, test_vector_1.size());
+    EXPECT_EQ(3, test_vector_2.size());
+    EXPECT_NE(test_vector_1.at(1), test_vector_2.at(1));
+}
+
+TEST(VectorTest, EquateMoveTest)
+{
+    auto test_vector_1 = Vector<int>({1, 2, 3, 4, 5});
+    auto test_vector_2 = Vector<int>({1, 2, 3});
+
+    test_vector_1 = std::move(test_vector_2);
+
+    EXPECT_EQ(3, test_vector_1.size());
+}
