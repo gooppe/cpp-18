@@ -1,7 +1,8 @@
 project_src = files([
     'main.cc',
     'vector.cc',
-    'message.cc'
+    'message.cc',
+    'ostream_guard.cc'
 ])
 
 executable(

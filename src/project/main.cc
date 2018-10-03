@@ -5,8 +5,10 @@
 #include <sys/stat.h>
 #include "message.cc"
 #include "vector.cc"
+#include "ostream_guard.cc"
 
 void vector_sample();
+void ostream_flag_sample();
 
 int main()
 {
@@ -18,6 +20,8 @@ int main()
     vector_sample();
     std::cout << "[2] Run message sample..." << std::endl;
     message(std::cout, "This is formatting %. pi=%; year=%; Use '%%' character to encode pattern.\n", "example", 3.14, 2018);
+    std::cout << "[3] Run guard sample..." << std::endl;
+    ostream_flag_sample();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -44,4 +48,13 @@ void vector_sample()
         f << idx++;
         f.close();
     }
+}
+
+void ostream_flag_sample()
+{
+    ostream_guard g(std::cout);
+    std::cout.setf(std::ios_base::hex, std::ios_base::basefield);
+    std::cout.width(10);
+    std::cout.fill('$');
+    std::cout << 100 << std::endl;
 }
