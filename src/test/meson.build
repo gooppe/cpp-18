@@ -18,3 +18,13 @@ test(
         dependencies: [gtest]
     )
 )
+
+test(
+    'array2d',
+    executable(
+        'array2d_test',
+        sources: ['array2d_test.cc'],
+        include_directories: src,
+        dependencies: [gtest]
+    )
+)

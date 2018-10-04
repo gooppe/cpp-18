@@ -2,7 +2,8 @@ project_src = files([
     'main.cc',
     'vector.cc',
     'message.cc',
-    'ostream_guard.cc'
+    'ostream_guard.cc',
+    'array2d.cc'
 ])
 
 executable(

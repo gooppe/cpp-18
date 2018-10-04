@@ -6,9 +6,11 @@
 #include "message.cc"
 #include "vector.cc"
 #include "ostream_guard.cc"
+#include "array2d.cc"
 
 void vector_sample();
 void ostream_flag_sample();
+void array2d_sample();
 
 int main()
 {
@@ -22,6 +24,8 @@ int main()
     message(std::cout, "This is formatting %. pi=%; year=%; Use '%%' character to encode pattern.\n", "example", 3.14, 2018);
     std::cout << "[3] Run guard sample..." << std::endl;
     ostream_flag_sample();
+    std::cout << "[4] Run array2d sample..." << std::endl;
+    array2d_sample();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -57,4 +61,14 @@ void ostream_flag_sample()
     std::cout.width(10);
     std::cout.fill('$');
     std::cout << 100 << std::endl;
+}
+
+void array2d_sample()
+{
+    auto x = Array2d<int>(1, 3, {1, 2, 3});
+    std::cout << x;
+    auto y = Array2d<int>(7, 4, 42);
+    std::cout << y;
+    auto z = Array2d<int>(5, 5, 7);
+    std::cout << z;
 }
