@@ -28,3 +28,13 @@ test(
         dependencies: [gtest]
     )
 )
+
+test(
+    'ostream_iterator',
+    executable(
+        'ostream_iterator',
+        sources: ['ostream_iterator_test.cc'],
+        include_directories: src,
+        dependencies: [gtest]
+    )
+)

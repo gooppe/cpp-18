@@ -7,10 +7,12 @@
 #include "vector.cc"
 #include "ostream_guard.cc"
 #include "array2d.cc"
+#include "custom_ostream_iterator.cc"
 
 void vector_sample();
 void ostream_flag_sample();
 void array2d_sample();
+void iterator_sample();
 
 int main()
 {
@@ -26,6 +28,8 @@ int main()
     ostream_flag_sample();
     std::cout << "[4] Run array2d sample..." << std::endl;
     array2d_sample();
+    std::cout << "[5] Run custom iterator sample..." << std::endl;
+    iterator_sample();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -71,4 +75,12 @@ void array2d_sample()
     std::cout << y;
     auto z = Array2d<int>(5, 5, 7);
     std::cout << z;
+}
+
+void iterator_sample()
+{
+    auto out_iter = ostream_iterator<int>(std::cout, ", ", 2);
+    std::vector<int> values = {1, 2, 3, 4, 5, 6, 7};
+    std::copy(values.begin(), values.end(), out_iter);
+    std::cout << std::endl;
 }

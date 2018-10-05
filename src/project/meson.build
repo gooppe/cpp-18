@@ -3,7 +3,8 @@ project_src = files([
     'vector.cc',
     'message.cc',
     'ostream_guard.cc',
-    'array2d.cc'
+    'array2d.cc',
+    'custom_ostream_iterator.cc'
 ])
 
 executable(
