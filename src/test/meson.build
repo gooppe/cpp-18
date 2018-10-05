@@ -38,3 +38,13 @@ test(
         dependencies: [gtest]
     )
 )
+
+test(
+    'merge_sort',
+    executable(
+        'merge_sort',
+        sources: ['merge_sort_test.cc'],
+        include_directories: src,
+        dependencies: [gtest]
+    )
+)

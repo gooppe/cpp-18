@@ -8,11 +8,13 @@
 #include "ostream_guard.cc"
 #include "array2d.cc"
 #include "custom_ostream_iterator.cc"
+#include "merge_sort.cc"
 
 void vector_sample();
 void ostream_flag_sample();
 void array2d_sample();
 void iterator_sample();
+void merge_sort_sample();
 
 int main()
 {
@@ -30,6 +32,8 @@ int main()
     array2d_sample();
     std::cout << "[5] Run custom iterator sample..." << std::endl;
     iterator_sample();
+    std::cout << "[6] Run merge sort sample..." << std::endl;
+    merge_sort_sample();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -82,5 +86,17 @@ void iterator_sample()
     auto out_iter = ostream_iterator<int>(std::cout, ", ", 2);
     std::vector<int> values = {1, 2, 3, 4, 5, 6, 7};
     std::copy(values.begin(), values.end(), out_iter);
+    std::cout << std::endl;
+}
+
+void merge_sort_sample()
+{
+    auto x = std::vector<int>({42, 3, 3, 2, 2, 1, 1});
+    sort(x.begin(), x.end());
+
+    for (auto v : x)
+    {
+        std::cout << v << " ";
+    }
     std::cout << std::endl;
 }

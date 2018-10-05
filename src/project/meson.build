@@ -4,7 +4,8 @@ project_src = files([
     'message.cc',
     'ostream_guard.cc',
     'array2d.cc',
-    'custom_ostream_iterator.cc'
+    'custom_ostream_iterator.cc',
+    'merge_sort.cc'
 ])
 
 executable(
