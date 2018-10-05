@@ -155,9 +155,8 @@ TEST_F(simple3x3_array_test, EquateCopyTest)
 
 TEST_F(masked3x3_array_test, BuildMaskTest)
 {
-    auto mask = test_array == op_array;
-    auto masked_array = test_array(mask);
-    auto filled_array = masked_array = 7;
+    auto copy_test_array = test_array;
+    copy_test_array(copy_test_array == op_array) = 7;
 
-    EXPECT_TRUE(filled_array.equal(Array2d<int>(3, 3, {1, 2, 3, 3, 2, 1, 7, 7, 7})));
+    EXPECT_TRUE(copy_test_array.equal(Array2d<int>(3, 3, {1, 2, 3, 3, 2, 1, 7, 7, 7})));
 }

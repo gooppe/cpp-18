@@ -86,7 +86,7 @@ class Array2d
         return data_[r][c];
     }
 
-    MaskedArray2d<T> operator()(Array2d<bool> mask)
+    MaskedArray2d<T> operator()(const Array2d<bool> &mask)
     {
         return MaskedArray2d<T>(*this, mask);
     }
@@ -403,10 +403,10 @@ template <class T>
 class MaskedArray2d
 {
   public:
-    Array2d<T> array;
-    Array2d<bool> mask;
+    Array2d<T> &array;
+    const Array2d<bool> &mask;
 
-    MaskedArray2d(const Array2d<T> &a, const Array2d<bool> &m) : array(a), mask(m)
+    MaskedArray2d(Array2d<T> &a, const Array2d<bool> &m) : array(a), mask(m)
     {
         if (!array.is_compatible(mask))
         {
@@ -414,16 +414,15 @@ class MaskedArray2d
         }
     }
 
-    Array2d<T> operator=(const T value)
+    void operator=(const T value)
     {
-        auto result = Array2d<T>(array.rows(), array.cols());
         for (size_t i = 0; i < array.rows(); i++)
         {
             for (size_t j = 0; j < array.cols(); j++)
             {
-                result(i, j) = mask(i, j) ? value : array(i, j);
+                if (mask(i, j))
+                    array(i, j) = value;
             }
         }
-        return result;
     }
 };
