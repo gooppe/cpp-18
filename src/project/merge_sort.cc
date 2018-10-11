@@ -2,7 +2,7 @@
 #include <functional>
 
 template <typename RandomAccessIterator, typename Compare>
-void merge_sort(const RandomAccessIterator begin, const RandomAccessIterator end, const Compare comp)
+void merge_sort(RandomAccessIterator begin, RandomAccessIterator end, const Compare comp)
 {
     auto size = std::distance(begin, end);
     if (size < 2)
