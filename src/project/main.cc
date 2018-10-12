@@ -9,12 +9,14 @@
 #include "array2d.cc"
 #include "custom_ostream_iterator.cc"
 #include "merge_sort.cc"
+#include "user_manager.cc"
 
 void vector_sample();
 void ostream_flag_sample();
 void array2d_sample();
 void iterator_sample();
 void merge_sort_sample();
+void user_manager_sample();
 
 int main()
 {
@@ -34,6 +36,8 @@ int main()
     iterator_sample();
     std::cout << "[6] Run merge sort sample..." << std::endl;
     merge_sort_sample();
+    std::cout << "[7] Run user manager sample..." << std::endl;
+    user_manager_sample();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -99,4 +103,14 @@ void merge_sort_sample()
         std::cout << v << " ";
     }
     std::cout << std::endl;
+}
+
+void user_manager_sample()
+{
+    auto user = User(0, "Ivan", "Ivanov");
+    auto group = UserGroup(0, "Students", std::unordered_set<User>({user}));
+    auto usersize = binary_size_traits<User>::size(user);
+    auto groupsize = binary_size_traits<UserGroup>::size(group);
+    message(std::cout, "Created user \'% %\' in group \'%\'.\nUser data size: % byte. Group data size: % byte.\n",
+            user.firstname, user.lastname, group.name, usersize, groupsize);
 }

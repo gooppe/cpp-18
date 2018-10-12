@@ -48,3 +48,13 @@ test(
         dependencies: [gtest]
     )
 )
+
+test(
+    'user_manager',
+    executable(
+        'user_manager',
+        sources: ['user_manager_test.cc'],
+        include_directories: src,
+        dependencies: [gtest]
+    )
+)
