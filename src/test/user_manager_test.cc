@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "project/user_manager.cc"
+#include "project/user_manager.hh"
 #include <string>
 #include <sstream>
 
