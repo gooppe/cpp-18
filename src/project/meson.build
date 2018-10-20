@@ -9,3 +9,12 @@ executable(
     dependencies: [],
     install: true
 )
+
+executable(
+    'line_enum',
+    include_directories: src,
+    sources: files(['line_enum.cc',
+                    'line_number_buffer.cc']),
+    dependencies: []
+    
+)

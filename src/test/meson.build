@@ -55,8 +55,18 @@ test(
         'user_manager',
         include_directories: src,
         sources: files(['user_manager_test.cc',
-                        '../project/user_manager.hh',
                         '../project/user_manager.cc']),
+        dependencies: [gtest]
+    )
+)
+
+test(
+    'line_number_buffer',
+    executable(
+        'line_number_buffer',
+        include_directories: src,
+        sources: files(['line_number_buffer_test.cc',
+                        '../project/line_number_buffer.cc']),
         dependencies: [gtest]
     )
 )
