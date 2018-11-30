@@ -70,3 +70,14 @@ test(
         dependencies: [gtest]
     )
 )
+
+test(
+    'merge_sort_mt',
+    executable(
+        'merge_sort_mt',
+        sources: ['merge_sort_test.cc', 
+                  '../project/merge_sort_mt.cc'],
+        include_directories: src,
+        dependencies: [gtest]
+    )
+)

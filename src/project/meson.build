@@ -1,5 +1,6 @@
 project_src = files([
-    'main.cc'
+    'main.cc',
+    'merge_sort_mt.cc'
 ])
 
 executable(

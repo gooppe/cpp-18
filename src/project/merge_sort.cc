@@ -2,16 +2,8 @@
 #include <functional>
 
 template <typename RandomAccessIterator, typename Compare>
-void merge_sort(RandomAccessIterator begin, RandomAccessIterator end, const Compare comp)
+void merge(RandomAccessIterator begin, RandomAccessIterator middle, RandomAccessIterator end, const Compare comp)
 {
-    auto size = std::distance(begin, end);
-    if (size < 2)
-        return;
-
-    auto middle = std::next(begin, size / 2);
-    merge_sort(begin, middle, comp);
-    merge_sort(middle, end, comp);
-
     std::vector<typename RandomAccessIterator::value_type> buffer;
 
     auto left_iter = begin;
@@ -23,6 +15,20 @@ void merge_sort(RandomAccessIterator begin, RandomAccessIterator end, const Comp
     buffer.insert(buffer.end(), right_iter, end);
 
     std::move(buffer.begin(), buffer.end(), begin);
+}
+
+template <typename RandomAccessIterator, typename Compare>
+void merge_sort(RandomAccessIterator begin, RandomAccessIterator end, const Compare comp)
+{
+    auto size = std::distance(begin, end);
+    if (size < 2)
+        return;
+
+    auto middle = std::next(begin, size / 2);
+    merge_sort(begin, middle, comp);
+    merge_sort(middle, end, comp);
+
+    merge(begin, middle, end, comp);
 }
 
 template <typename RandomAccessIterator>

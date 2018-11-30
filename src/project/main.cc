@@ -3,13 +3,14 @@
 #include <algorithm>
 #include <string>
 #include <sys/stat.h>
+#include <chrono>
 #include "message.cc"
 #include "vector.cc"
 #include "ostream_guard.cc"
 #include "array2d.cc"
 #include "custom_ostream_iterator.cc"
-#include "merge_sort.cc"
 #include "user_manager.cc"
+#include "merge_sort_mt.cc"
 
 void vector_sample();
 void ostream_flag_sample();
@@ -17,6 +18,8 @@ void array2d_sample();
 void iterator_sample();
 void merge_sort_sample();
 void user_manager_sample();
+void merge_sort_mt_sample();
+void sort_benchmark();
 
 int main()
 {
@@ -38,6 +41,8 @@ int main()
     merge_sort_sample();
     std::cout << "[7] Run user manager sample..." << std::endl;
     user_manager_sample();
+    std::cout << "[8] Run merge sort benchmark..." << std::endl;
+    sort_benchmark();
 
     std::cout << std::string(42, '=') << std::endl;
     std::cout << "Running all examples completed." << std::endl;
@@ -96,7 +101,7 @@ void iterator_sample()
 void merge_sort_sample()
 {
     auto x = std::vector<int>({42, 3, 3, 2, 2, 1, 1});
-    sort(x.begin(), x.end());
+    merge_sort(x.begin(), x.end());
 
     for (auto v : x)
     {
@@ -113,4 +118,31 @@ void user_manager_sample()
     auto groupsize = binary_size_traits<UserGroup>::size(group);
     message(std::cout, "Created user \'% %\' in group \'%\'.\nUser data size: % byte. Group data size: % byte.\n",
             user.firstname, user.lastname, group.name, usersize, groupsize);
+}
+
+void sort_benchmark()
+{
+    auto file = std::ofstream("./sort_comp.csv");
+    for (uint power = 0; power < 7; power++)
+    {
+        uint64_t size = (uint64_t)pow10l(power);
+        file << size << ", ";
+        std::cout << size << ", ";
+
+        std::vector<void (*)(std::vector<int>::iterator, std::vector<int>::iterator)> test_funcs = {merge_sort, merge_sort_mt};
+
+        for (auto &func : test_funcs)
+        {
+            std::vector<int> numbers(size);
+            std::generate(numbers.begin(), numbers.end(), std::rand);
+            auto start_time = std::chrono::system_clock::now();
+            func(numbers.begin(), numbers.end());
+            auto end_time = std::chrono::system_clock::now();
+            file << (end_time - start_time).count() << ", ";
+            std::cout << (end_time - start_time).count() << ", ";
+        }
+        file << std::endl;
+        std::cout << std::endl;
+    }
+    file.close();
 }
