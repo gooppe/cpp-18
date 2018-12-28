@@ -6,6 +6,9 @@
 template <class T>
 class MaskedArray2d;
 
+/**
+\brief Простой 2-мерный массив.
+ */
 template <class T>
 class Array2d
 {
@@ -13,6 +16,11 @@ class Array2d
     size_t rows_ = 0, cols_ = 0;
 
   public:
+    /**
+    \brief Создать пустой массив.
+    \param r Чисто строк.
+    \param c Число столбцов.
+    */
     Array2d(size_t r, size_t c) : rows_(r), cols_(c)
     {
         if (r < 1 || c < 1)
@@ -25,7 +33,12 @@ class Array2d
             data_[i] = new T[cols_];
         }
     }
-
+    /**
+    \brief Создать пустой массив, заполненный заданным значением.
+    \param r Чисто строк.
+    \param c Число столбцов.
+    \param fill_value Значение каждой ячейки массива.
+    */
     Array2d(size_t r, size_t c, T fill_value) : Array2d(r, c)
     {
         for (size_t i = 0; i < rows_; i++)
@@ -80,7 +93,12 @@ class Array2d
 
         return *this;
     }
-
+    /**
+    \brief Получить значение из массива по индексу.
+    \param r Номер строки.
+    \param c Номер столбца.
+    \return Значение массива (r, c).
+    */
     T &operator()(size_t r, size_t c) const
     {
         return data_[r][c];

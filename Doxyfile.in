@@ -1,0 +1,5 @@
+PROJECT_NAME = "C++ Tasks Solution"
+OUTPUT_DIRECTORY = @OUTPUT_DIRECTORY@
+RECURSIVE = YES
+INPUT = src/project
+LANGUAGE = Russian
