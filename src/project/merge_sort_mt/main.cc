@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
     auto file = std::ofstream("./sort_comp.csv");
     for (uint power = 0; power < 7; power++)
     {
-        uint64_t size = (uint64_t)pow10l(power);
+        uint64_t size = (uint64_t)pow(10, power);
         file << size << ", ";
         std::cout << size << ", ";
 
